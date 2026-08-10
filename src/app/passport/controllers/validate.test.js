@@ -59,12 +59,15 @@ describe("validate controller", () => {
     req.customFetch = stubCustomFetch(checkPassportResponseBody);
     await validate.saveValues(req, res, next);
 
-    sandbox.assert.calledOnceWithExactly(req.customFetch, "/check-passport", {
-      method: "POST",
-      jsonBody: checkPassportRequestBody,
-      headers: { session_id: SESSION_ID },
-      timeoutMs: 30_000
-    });
+    expect(req.customFetch).to.have.been.calledOnceWithExactly(
+      "/check-passport",
+      {
+        method: "POST",
+        jsonBody: checkPassportRequestBody,
+        headers: { session_id: SESSION_ID },
+        timeoutMs: 30_000
+      }
+    );
   });
 
   it("should set redirect_uri and state on session authParams", async () => {
@@ -83,15 +86,18 @@ describe("validate controller", () => {
     req.customFetch = stubCustomFetch(checkPassportResponseBody);
     await validate.saveValues(req, res, next);
 
-    sandbox.assert.calledOnceWithExactly(req.customFetch, "/check-passport", {
-      method: "POST",
-      jsonBody: {
-        ...checkPassportRequestBody,
-        forenames: ["Dan", "Joe"]
-      },
-      headers: { session_id: SESSION_ID },
-      timeoutMs: 30_000
-    });
+    expect(req.customFetch).to.have.been.calledOnceWithExactly(
+      "/check-passport",
+      {
+        method: "POST",
+        jsonBody: {
+          ...checkPassportRequestBody,
+          forenames: ["Dan", "Joe"]
+        },
+        headers: { session_id: SESSION_ID },
+        timeoutMs: 30_000
+      }
+    );
   });
 
   it("should forward errors to the callback", async () => {
