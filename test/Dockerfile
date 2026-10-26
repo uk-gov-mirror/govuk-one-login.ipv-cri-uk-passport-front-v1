@@ -1,4 +1,4 @@
-FROM node@sha256:5373f1906319b3a1f291da5d102f4ce5c77ccbe29eb637f072b6c7b70443fc36
+FROM node:22.23.4-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
 
 # Install system dependencies for Playwright and AWS CLI
 RUN apt-get update && apt-get install -y \
